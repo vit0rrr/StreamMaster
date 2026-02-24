@@ -1,25 +1,38 @@
 @Service
 public class InscricaoService {
 
-    private final InscricaoRepository repository;
+    private final InscricaoRepository Repository;
 
-    // Injeção de Dependência! O Spring entrega o repository pronto.
-    public InscricaoService(InscricaoRepository repository) {
-        this.repository = repository;
+    public InscricaoService(InscricaoRepository Repository) {
+        this.Repository = Repository;
     }
 
-    public void registrarNovoAluno(InscricaoRequestDTO dto) {
-        // 1. Regra de negócio: Já existe?
-        if (repository.existsByEmail(dto.email())) {
-            throw new RuntimeException("E-mail já cadastrado no curso!");
-        }
-
-        // 2. Transforma o DTO (Maleta) na Entidade (Banco)
-        Inscricao novaInscricao = new Inscricao();
-        novaInscricao.setEmail(dto.email());
-        novaInscricao.setDataInscricao(LocalDateTime.now());
-
-        // 3. Manda salvar
-        repository.save(novaInscricao);
+    public Inscricao salvar(Inscricao inscricao) {
+        return Repository.save(inscricao);
     }
+
+
+    public lista<Inscricao> listar() {
+        return Repository.findAll();
+    }
+
+    public Inscricao buscarPorId(Long id) {
+        return Repository.findById(id)
+        .orElseThrow(() -> new ResourceNotFoundException("Inscrição não encontrada com id: " + id));
+    }
+
+    public Inscricao atualizar(Long id, Inscricao dadosAtualizados) {
+        Inscricao inscricaoExistente = buscarPorId(id);
+        // Atualize os campos necessários
+        inscricaoExistente.setCampo1(dadosAtualizados.getCampo1());
+        inscricaoExistente.setCampo2(dadosAtualizados.getCampo2());
+        // ... atualize outros campos conforme necessário
+        return Repository.save(inscricaoExistente);
+    }
+
+    public void deletar(Long id) {
+        Inscricao inscricaoExistente = buscarPorId(id);
+        Repository.delete(inscricaoExistente);
+    }
+
 }

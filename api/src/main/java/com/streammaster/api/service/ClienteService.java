@@ -16,10 +16,10 @@ public class ClienteService {
     }
 
     // CREAT 
-    public client salvar(Cliente dto) {
+    public Cliente salvar(Cliente dto) {
         Cliente cliente = new Cliente();
-        cliente.setNome(dto.nome());
-        cliente.setEmail(dto.email());
+        cliente.setNome(dto.getNome());
+        cliente.setEmail(dto.getEmail());
         return repository.save(cliente);
     }
 
@@ -38,8 +38,8 @@ public class ClienteService {
     //UPDATE
     public Cliente atualizar(Long id, Cliente dto) {
         Cliente cliente = repository.findById(id).orElseThrow(() -> new RuntimeException("Cliente não encontrado"));
-        cliente.setNome(dto.nome());
-        cliente.setEmail(dto.email());
+        cliente.setNome(dto.getNome());
+        cliente.setEmail(dto.getEmail());
         return repository.save(cliente);
     }
 

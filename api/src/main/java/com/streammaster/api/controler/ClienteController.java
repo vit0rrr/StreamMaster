@@ -1,8 +1,10 @@
-package com.streammaster.api.controller;
+package com.streammaster.api.controler;
 
 import com.streammaster.api.service.ClienteService;
 import com.streammaster.api.model.Cliente;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
 import java.util.List;
 
 @RestController
@@ -19,7 +21,7 @@ public class ClienteController {
     //CREATE (POST) - ROTA: POST / CLIENTES
     @PostMapping
     public ResponseEntity<Cliente> criar(@RequestBody Cliente dto) {
-        Cliente novoCliente = service.salvar(dto);
+        Cliente novoCliente = service.salvar (dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(novoCliente);
     }
 

@@ -1,5 +1,4 @@
 package com.streammaster.api.repository;
-
 import com.streammaster.api.model.Cliente;
 import org.springframework.data.jpa.repository.JpaRepository;
 

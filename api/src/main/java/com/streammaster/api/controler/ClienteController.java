@@ -1,11 +1,14 @@
 package com.streammaster.api.controler;
 
 import com.streammaster.api.service.ClienteService;
+import jakarta.validation.Valid;
 import com.streammaster.api.model.Cliente;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
 import java.util.List;
+
+
 
 @RestController
 @RequestMapping("/clientes")
@@ -20,12 +23,12 @@ public class ClienteController {
 
     //CREATE (POST) - ROTA: POST / CLIENTES
     @PostMapping
-    public ResponseEntity<Cliente> criar(@RequestBody Cliente dto) {
+    public ResponseEntity<Cliente> criar(@RequestBody @Valid Cliente dto) {
         Cliente novoCliente = service.salvar (dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(novoCliente);
     }
 
-
+   
     //READ (GET) - ROTA: GET / CLIENTES
     @GetMapping
     public ResponseEntity<List<Cliente>> listarTodos() {
@@ -40,10 +43,12 @@ public class ClienteController {
 
     //UPDATE (PUT) - ROTA: PUT / CLIENTES/{ID}
     @PutMapping("/{id}")
-    public ResponseEntity<Cliente> atualizar(@PathVariable Long id, @RequestBody Cliente dto) {
+    public ResponseEntity<Cliente> atualizar(@PathVariable Long id, @RequestBody @Valid Cliente dto) {
         Cliente clienteAtualizado = service.atualizar(id, dto);
         return ResponseEntity.ok(clienteAtualizado);
     }
+
+
     //DELETE (DELETE) - ROTA: DELETE / CLIENTES/{ID}
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletar(@PathVariable Long id) {

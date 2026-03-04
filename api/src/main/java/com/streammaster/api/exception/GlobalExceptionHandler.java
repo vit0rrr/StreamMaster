@@ -31,15 +31,18 @@ public class GlobalExceptionHandler {
 
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<ErroDeResposta> tratarErroGaenerico(Exception ex, HttpServletRequest request) {
-
+    public ResponseEntity<ErroDeResposta> tratarErroGenerico(Exception ex, HttpServletRequest request) {
+        
+        ex.printStackTrace(); 
+        
         ErroDeResposta erro = new ErroDeResposta(
-            LocalDateTime.now(),
-            HttpStatus.INTERNAL_SERVER_ERROR.value(),
-            ex.getMessage(),
-            request.getRequestURI()
+                LocalDateTime.now(),
+                HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                "Ocorreu um erro interno inesperado no servidor.",
+                request.getRequestURI()
         );
-        return ResponseEntity.status(500).body(erro);
+
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(erro);
     }
 
 

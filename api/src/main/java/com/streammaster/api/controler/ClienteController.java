@@ -2,6 +2,8 @@ package com.streammaster.api.controler;
 
 import com.streammaster.api.service.ClienteService;
 import jakarta.validation.Valid;
+
+import com.streammaster.api.dto.ClienteDTO;
 import com.streammaster.api.model.Cliente;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +25,7 @@ public class ClienteController {
 
     //CREATE (POST) - ROTA: POST / CLIENTES
     @PostMapping
-    public ResponseEntity<Cliente> criar(@RequestBody @Valid Cliente dto) {
+    public ResponseEntity<Cliente> criar(@RequestBody @Valid ClienteDTO dto) {
         Cliente novoCliente = service.salvar (dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(novoCliente);
     }
@@ -43,11 +45,11 @@ public class ClienteController {
 
     //UPDATE (PUT) - ROTA: PUT / CLIENTES/{ID}
     @PutMapping("/{id}")
-    public ResponseEntity<Cliente> atualizar(@PathVariable Long id, @RequestBody @Valid Cliente dto) {
+    public ResponseEntity<Cliente> atualizar(@PathVariable Long id, @RequestBody @Valid ClienteDTO dto) {
         Cliente clienteAtualizado = service.atualizar(id, dto);
         return ResponseEntity.ok(clienteAtualizado);
     }
-
+    
 
     //DELETE (DELETE) - ROTA: DELETE / CLIENTES/{ID}
     @DeleteMapping("/{id}")

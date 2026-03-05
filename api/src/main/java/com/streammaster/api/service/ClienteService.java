@@ -2,6 +2,8 @@ package com.streammaster.api.service;
 
 import com.streammaster.api.repository.ClienteRepository;
 import com.streammaster.api.model.Cliente;
+import com.streammaster.api.model.Perfil;
+
 import org.springframework.stereotype.Service;
 import com.streammaster.api.dto.ClienteDTO;
 import java.util.List;
@@ -23,11 +25,11 @@ public class ClienteService {
         return repository.save(cliente);
     }
 
-    //READ
-    public List<Cliente> listarTodos() {
-        return repository.findAll();
+    // READ BUSCAR TODOS COM PERFIS
+    public List<Cliente> ListarTodos() {
+        // Agora ele busca tudo em apenas 1 ida ao banco de dados!
+        return repository.findAllComPerfis();
     }
-
 
     //READ   public Cliente buscarPorId(Long id) {
     public Cliente buscarPorId(Long id) {
@@ -49,4 +51,9 @@ public class ClienteService {
         Cliente cliente = repository.findById(id).orElseThrow(() -> new RuntimeException("Cliente não encontrado"));
         repository.delete(cliente);
     }
+
+
+  
+    
 }
+

@@ -25,7 +25,7 @@ const carregarModulosAPI = () => __awaiter(void 0, void 0, void 0, function* () 
     yield delay(1000);
     const dadosFakes = Array.from({ length: 50 }, (_, i) => ({
         id: i + 1,
-        nome: `Módulo ${i + 1}: Java Streams Avançado`,
+        nome: `Módulo ${i + 1}: Java Avançado`,
         duracao: "45m"
     }));
     return {

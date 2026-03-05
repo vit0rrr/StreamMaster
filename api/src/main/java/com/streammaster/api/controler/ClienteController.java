@@ -32,10 +32,7 @@ public class ClienteController {
 
    
     //READ (GET) - ROTA: GET / CLIENTES
-    @GetMapping
-    public ResponseEntity<List<Cliente>> listarTodos() {
-        return ResponseEntity.ok(service.listarTodos());
-    }
+
 
     //READ (GET) por ID - ROTA: GET / CLIENTES/{ID}
     @GetMapping("/{id}")

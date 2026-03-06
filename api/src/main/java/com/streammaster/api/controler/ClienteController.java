@@ -2,13 +2,15 @@ package com.streammaster.api.controler;
 
 import com.streammaster.api.service.ClienteService;
 import jakarta.validation.Valid;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import com.streammaster.api.dto.ClienteDTO;
 import com.streammaster.api.model.Cliente;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
-import java.util.List;
+
 
 
 
@@ -32,7 +34,13 @@ public class ClienteController {
 
    
     //READ (GET) - ROTA: GET / CLIENTES
-
+    @GetMapping
+    public ResponseEntity<Page<Cliente>> listarClientes(
+            @PageableDefault(size = 10, sort = {"nome"}) Pageable paginacao) {
+        
+        Page<Cliente> clientesPaginados = service.listarTodos(paginacao);
+        return ResponseEntity.ok(clientesPaginados);    
+    }
 
     //READ (GET) por ID - ROTA: GET / CLIENTES/{ID}
     @GetMapping("/{id}")

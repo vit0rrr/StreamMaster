@@ -3,7 +3,8 @@ package com.streammaster.api.service;
 import com.streammaster.api.repository.ClienteRepository;
 import com.streammaster.api.model.Cliente;
 import com.streammaster.api.model.Perfil;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import com.streammaster.api.dto.ClienteDTO;
 import java.util.List;
@@ -26,11 +27,11 @@ public class ClienteService {
     }
 
     // READ BUSCAR TODOS COM PERFIS
-    public List<Cliente> ListarTodos() {
-        // Agora ele busca tudo em apenas 1 ida ao banco de dados!
-        return repository.findAllComPerfis();
+    public Page<Cliente> listarTodos(Pageable paginacao) {
+        return repository.findAllComPerfis(paginacao);
     }
 
+    
     //READ   public Cliente buscarPorId(Long id) {
     public Cliente buscarPorId(Long id) {
         return repository.findById(id).orElseThrow(() -> new RuntimeException("Cliente não encontrado"));

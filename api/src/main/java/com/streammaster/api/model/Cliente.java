@@ -13,6 +13,7 @@ public class Cliente {
     private Long id;
     private String nome;
     private String email;
+    private String telefone;
 
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
     private List<Perfil> perfis = new ArrayList<>();
@@ -26,7 +27,11 @@ public class Cliente {
     public void setNome(String nome) { this.nome = nome; }
     public String getEmail() { return email; }
     public void setEmail(String email) { this.email = email; }
-
     public List<Perfil> getPerfis() { return perfis; }
-    public void setPerfis(List<Perfil> perfis) { this.perfis = perfis; }
+    public void setPerfis(List<Perfil> perfis) { this.perfis = perfis;  }
+    public String getTelefone() { return telefone; }
+    public void setTelefone(String telefone) { this.telefone = telefone; }  
+
+
+
 }
